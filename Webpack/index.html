@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="src/css/first.css">
+    <link rel="stylesheet" href="src/css/second.css">
+</head>
+<body>
+<ul id="list">
+
+</ul>
+<p>Вы здесь: <span id="uhere"></span></p>
+<p>Ближайший магазин: <span id="nearest-store"></span></p>
+<script src="./dist/js/app.js"></script>
+<script src="./dist/ts/tsc.js"></script>
+<script>
+    let Store1 = new Store('Cool Store', new Point( -71.0987, 82.7345))
+    let Store2 = new Store('iNMarket', new Point( -121.7654, 22.3656))
+    let Store3 = new Store('Local Storage', new Point( -23.1234, 12.0812))
+    let arr = [Store1, Store2, Store3]
+    let ul = document.getElementById("list");
+
+for(let i = 0; i < arr.length; i++) {
+    let li = document.createElement("li");
+    li.innerText = "Name: " + arr[i].name + "    x:" + arr[i].point.x + "      y: " + arr[i].point.y;
+    ul.appendChild(li);
+
+}
+
+    let here = {name: "You are here", point: new Point( -71.1470, 42.3834) };
+    document.getElementById("uhere").innerText = "x: " + here.point.x + " y: " + here.point.y;
+    console.log(here)
+    console.log(Store1)
+    console.log(Store2)
+    console.log(Store3)
+</script>
+</body>
+</html>

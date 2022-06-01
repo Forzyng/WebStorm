@@ -1,0 +1,8 @@
+# Project exclude paths
+/backExam/node_modules/
+/Docker/node_modules/
+/Libraries/node_modules/
+/Recipe-site/backExam/node_modules/
+/Ubuntu/node_modules/
+/Webpack/dist/
+/Webpack/node_modules/
