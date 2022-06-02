@@ -46,7 +46,7 @@ exports.middlewareAuth = function (req, response, next) {
     // console.log('Next')
     return next()
 }
-
+//todo НЕ ТЯГАТЬ ЮЗЕРАЙДИ
 exports.updateUserPrivacyById = async function (request, response) {
     console.log(request.user)
     if(!request.user) {
@@ -154,6 +154,11 @@ exports.authByLogin = async function (req, res){
     const email = req.body.email
     const password = req.body.password
 
+    if(email.length <= 5 )
+        return res.status(403).json({ message: 'email must be more than 5 symbols' })
+    if(password.length <= 5 )
+        return res.status(403).json({ message: 'password must be more than 5 symbols' })
+
     users.findOne( {$or: [{email: email}, {login: email}]},
         function(err, user) {
             if (err) {
@@ -204,7 +209,7 @@ exports.authByLogin = async function (req, res){
 
         })
 
-    return res.status(403).json({ message: 'Invalid password or username' })
+    //return res.status(403).json({ message: 'Invalid password or username' })
 }
 
 exports.tryCreateUser = async function (req, res ){
