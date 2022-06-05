@@ -44,9 +44,6 @@ app.use(auth.middlewareAuth)
 app.post ('/api/auth', auth.authByLogin)
 app.post('/api/tryCreateUser', auth.tryCreateUser)
 
-let crypt = require('./controllers/cryptography')
-app.post ('/api/encryptData', crypt.encrypt)
-//app.post('/api/decryptData', crypt.decrypt)
 
 let workwpost = require('./controllers/workwpost')
 app.get('/api/getAllPosts', workwpost.getAllPosts)

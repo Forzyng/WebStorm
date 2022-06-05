@@ -8,7 +8,6 @@ const users = require('../models/user')
 const Token = require("../models/token");
 const sendEmail = require("../helpers/emailSend/email");
 const Config = require('../config')
-const router = require("../routes");
 
 exports.middlewareAuth = function (req, response, next) {
     // console.log(req.headers.authorization)
@@ -49,14 +48,15 @@ exports.middlewareAuth = function (req, response, next) {
 //todo НЕ ТЯГАТЬ ЮЗЕРАЙДИ
 exports.updateUserPrivacyById = async function (request, response) {
     console.log(request.user)
+    const user = request.user
     if(!request.user) {
         return response.status(401)
             .json({ message: 'Not authorized' })
     }
 
-    const id = request.body.id
-    const password = request.body.password
-    const email = request.body.email
+    const id = user._id
+    const password = user.password
+    const email = user.email
     let hashedPassword
 
    // bcrypt
@@ -99,14 +99,15 @@ exports.updateUserPrivacyById = async function (request, response) {
 
 exports.updateUserById = async function (request, response) {
     console.log(request.user)
+    const user = request.user
     if(!request.user) {
         return response.status(401)
             .json({ message: 'Not authorized' })
     }
 
-    const id = request.body.id
-    const avatar = request.body.avatar
-    const description = request.body.description
+    const id = user.id
+    const avatar = user.avatar
+    const description = user.description
 
     users.findOneAndUpdate(
         { _id: id },
@@ -126,12 +127,13 @@ exports.updateUserById = async function (request, response) {
 
 exports.deleteUserById = async function (request, response) {
     console.log(request.user)
+    const user = request.user
     if(!request.user) {
         return response.status(401)
             .json({ message: 'Not authorized' })
     }
 
-    const id = request.body.id
+    const id = user.id
 
     users.findOneAndDelete({ id: id }, function (err, user) {
         if (err){
